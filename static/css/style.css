@@ -1,0 +1,11 @@
+#post {
+    width: 500px;
+}
+#det_post {
+    width: 500px;
+}
+#panel {position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;}
+  body{color:red}

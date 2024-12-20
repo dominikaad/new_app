@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css') }}">
+</head>
+<body>
+{% for i in b %}
+<h1> {{i.0}} - {{i.1}}</h1>
+<p><img id="det_post" src="{{i.2}}" alt="new_post"></p>
+<h2>{{i.3}}</h2>
+{% endfor %}
+</body>
+</html>

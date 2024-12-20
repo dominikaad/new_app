@@ -14,7 +14,9 @@ Session(app)
 def page_index():
     cursor.execute("SELECT * FROM post")
     a = cursor.fetchall()
-    return render_template('index.html', a=a)
+    cursor.execute("SELECT * FROM users")
+    c = cursor.fetchall()
+    return render_template('index.html', a=a, c=c)
 
 @app.route('/add_post/')
 def add_post():
@@ -80,6 +82,24 @@ def aut_user():
                 flash('Неверный логин или пороль', 'danger')
                 return redirect(url_for('registration'))
             return redirect(url_for('page_index'))
+
+@app.route('/detail/<i>')
+def post(i):
+    cursor.execute('SELECT * FROM post WHERE id = (?)', [i])
+    b = cursor.fetchall()
+    return render_template('detail.html', b=b)
+
+@app.route('/find/', methods=['POST', 'GET'])
+def fnd_user():
+    if request.method == 'POST':
+        id = request.form['id']
+        cursor.execute('SELECT * FROM users WHERE id = (?)', [id])
+        b = cursor.fetchall()
+        if b:
+            return render_template('result_id.html', b=b)
+        else:
+            return redirect(url_for('page_index'))
+    return render_template('result_id.html', b=b)
 
 @app.route("/logout")
 def logout():
