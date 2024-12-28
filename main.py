@@ -31,7 +31,7 @@ def save_post():
     for i in image:
         title = request.form['title']
         description = request.form['description']
-        a = f'static/uploads/{i.filename}'
+        a = f'/uploads/{i.filename}'
         i.save(a)
         cursor.execute(
             "INSERT INTO post (title, file_name, discription) VALUES (?,?,?)",
@@ -92,14 +92,35 @@ def post(i):
 @app.route('/find/', methods=['POST', 'GET'])
 def fnd_user():
     if request.method == 'POST':
+        print(32423)
         id = request.form['id']
         cursor.execute('SELECT * FROM users WHERE id = (?)', [id])
-        b = cursor.fetchall()
-        if b:
-            return render_template('result_id.html', b=b)
+        c = cursor.fetchall()
+        cursor.execute('SELECT file_name FROM post WHERE id = (?)', [id])
+        d = cursor.fetchall()
+        if c:
+            cursor.execute('SELECT flag FROM users')
+            e = cursor.fetchall()
+            cursor.execute('SELECT podpis FROM users')
+            f = cursor.fetchall()
+            if e == False:
+                f+=1
+                cursor.execute(
+                    "INSERT INTO user (podpis) VALUES (?)",
+                    [f])
+                con.commit()
+                e = True
+            elif e == True:
+                f -= 1
+                cursor.execute(
+                    "INSERT INTO user (podpis) VALUES (?)",
+                    [f])
+                con.commit()
+                e = False
+            return render_template('result_id.html', c=c, d=d)
         else:
             return redirect(url_for('page_index'))
-    return render_template('result_id.html', b=b)
+    return render_template('result_id.html')
 
 @app.route("/logout")
 def logout():

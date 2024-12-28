@@ -8,7 +8,7 @@
 <body>
 {% for i in b %}
 <h1> {{i.0}} - {{i.1}}</h1>
-<p><img id="det_post" src="{{i.2}}" alt="new_post"></p>
+<p><img src="{{url_for('static', filename=i.2)}}" alt="new_post"></p>
 <h2>{{i.3}}</h2>
 {% endfor %}
 </body>

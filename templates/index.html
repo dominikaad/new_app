@@ -11,6 +11,10 @@
   top: 0;
   left: 0;
   width: 100%;}
+        #find {position: fixed;
+  top: 500;
+  right: 2600;
+  width: 100%;}
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
@@ -76,7 +80,7 @@
 <form action="/login/"><h4> Войти в свой аккаунт</h4>
     <input type="submit" value="Login">
 </form>
-<form  action="/find/", method="post">
+<form id="find" action="/find/", method="post">
 <input type="text" name="id" placeholder="Поиск по id пользователя:">
     <input type="submit" value="найти">
 </form>
@@ -86,7 +90,7 @@
     <div class="container">
         <div class="post">
             <div class="title"> <h2> {{i.0}} - <a href="/detail/{{i.0}}"> {{i.1}}</a></h2></div>
-            <div class="content"><img src="{{i.2}}" alt="new_post"> </div>
+            <div class="content"><img src="{{url_for('static', filename=i.2)}}" alt="new_post"> </div>
             <div class="description"> </div>
         </div>
 {% endfor %}
