@@ -117,7 +117,7 @@ def fnd_user():
         #             [f])
         #         con.commit()
         #         e = False
-            return render_template('result_id.html', c=c, d=d)
+            return render_template('result_id.html', c=c)
         else:
             return redirect(url_for('page_index'))
     return render_template('result_id.html')
