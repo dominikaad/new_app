@@ -96,27 +96,27 @@ def fnd_user():
         id = request.form['id']
         cursor.execute('SELECT * FROM users WHERE id = (?)', [id])
         c = cursor.fetchall()
-        cursor.execute('SELECT file_name FROM post WHERE id = (?)', [id])
-        d = cursor.fetchall()
+        # cursor.execute('SELECT file_name FROM post WHERE id = (?)', [id])
+        # d = cursor.fetchall()
         if c:
-            cursor.execute('SELECT flag FROM users')
-            e = cursor.fetchall()
-            cursor.execute('SELECT podpis FROM users')
-            f = cursor.fetchall()
-            if e == False:
-                f+=1
-                cursor.execute(
-                    "INSERT INTO user (podpis) VALUES (?)",
-                    [f])
-                con.commit()
-                e = True
-            elif e == True:
-                f -= 1
-                cursor.execute(
-                    "INSERT INTO user (podpis) VALUES (?)",
-                    [f])
-                con.commit()
-                e = False
+        #     cursor.execute('SELECT flag FROM users')
+        #     e = cursor.fetchall()
+        #     cursor.execute('SELECT podpis FROM users')
+        #     f = cursor.fetchall()
+        #     if e == False:
+        #         f+=1
+        #         cursor.execute(
+        #             "INSERT INTO user (podpis) VALUES (?)",
+        #             [f])
+        #         con.commit()
+        #         e = True
+        #     elif e == True:
+        #         f -= 1
+        #         cursor.execute(
+        #             "INSERT INTO user (podpis) VALUES (?)",
+        #             [f])
+        #         con.commit()
+        #         e = False
             return render_template('result_id.html', c=c, d=d)
         else:
             return redirect(url_for('page_index'))
